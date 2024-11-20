@@ -2,18 +2,7 @@ const searchBtn = document.getElementById('searchBtn');
 const searchBox = document.getElementById('searchBox');
 const games = document.getElementById('games');
 
-
-
-
-
-
-// searchBtn.addEventListener('click', ()=> {
-//     console.log(searchBox.value);
-//     const query = searchBox.value;
-//     searchShit(query);
-//     localStorage.setItem('searchQuery', 'Half-Life');
-// });
-
+/* grabs the text entered into the search box and sends it to be plugged into the API function, uses localStorage to have "Half-Life" be the default query upon load */
 function querying() {
     console.log(searchBox.value);
     const query = searchBox.value;
@@ -21,6 +10,7 @@ function querying() {
     localStorage.setItem('searchQuery', 'Half-Life');
 };
 
+/* resets to the searchquery localStorage and resets the id localStorage to "nope" (which is used for determining which link was clicked and sending that information to game.html) upon load */
 window.addEventListener('load', (event)=> {
     let searchItem = localStorage.getItem('searchQuery');
     localStorage.setItem('id', 'nope');
@@ -28,12 +18,8 @@ window.addEventListener('load', (event)=> {
     searchShit(searchItem);
 })
 
-// $query = 'Pseudoregalia';
-
+/* calls the API with the serach query, also sends that specific link + query to game.html */
 async function searchShit($query) {    
-
-    // console.log($query);
-
     const url = `https://steam2.p.rapidapi.com/search/${$query}/page/1`;
     localStorage.setItem('transfer', url);
     let test = localStorage.getItem('transfer');
@@ -57,7 +43,9 @@ async function searchShit($query) {
         console.error(error);
     }
 }
-// wawawawa
+
+/* setting a for loop to loop through the HTML creating code up to 10 times, with an else if waiting for an undefinied when it runs out and has less than 10 games appear, and an if waiting to cut it off if it hits 10 games */
+/* the splide framework is integrated here with the settings to alter how it functions, and the HTML createElement code is set up with the relevant classes to allow it to work */
 function displayGames(result){
     games.innerHTML = '';
     for(let i=0; i < 11; i++){
@@ -101,6 +89,11 @@ function displayGames(result){
             games.appendChild(splide__slide);
         }
     }
+    /* an (unfortunately) somewhat brute-forcey solution for getting the specific game clicked over to game.html
+
+    relies on using mouseover addEventListeners with querySelectorAlls to account for how the splide treats its ability to loop around. each mouseover will update an id localStorage value to a number between 0-9 depending on its placement, corresponding with its placement in the API array, this id value is read on game.html in conjunction with the array being called on that side to grab the correct game you clicked on
+    
+    couldn't work out a way to make it more modular depending on how many games are called, although im sure there is a way to do so that would be a lot cleaner and save a lot of lines. */
     const link0 = document.querySelectorAll('.link0');
     const link1 = document.querySelectorAll('.link1');
     const link2 = document.querySelectorAll('.link2');
@@ -173,20 +166,3 @@ function displayGames(result){
         }
     }
 }
-
-
-// const other = document.getElementById('other');
-
-
-// other.addEventListener("mouseover", otherClick);
-//     function otherClick() {
-//         localStorage.setItem('id', 'huh?');
-
-//     }
-
-// 1.addEventListener('click', ()=> {
-//     localStorage.setItem('number', 'one');
-// });
-
-
-// searchShit();

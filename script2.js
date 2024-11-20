@@ -1,7 +1,6 @@
-// const url = `https://steam2.p.rapidapi.com/search/${$query}/page/1`;
-
-// console.log(url);
 const games = document.getElementById('games');
+
+/* querying the same API call on index.html with the sent over search link to grab the same Array information */
 async function load(){
     const options = {
         method: 'GET',
@@ -14,9 +13,6 @@ async function load(){
     let url = localStorage.getItem('transfer');
         console.log(url);
     
-    
-
-
     try {
         const response = await fetch(url, options);
         const result = await response.json();
@@ -28,7 +24,8 @@ async function load(){
     } 
 
     
-    /* Game Detail*/
+    /* Game Detail grabbing */
+    /* uses a number id kept in local storage from the index page to determine which part of the array to grab the steam appId from, then query the API to grab the detailed information */
     async function gameDetail(result){
         let id = localStorage.getItem('id');
         console.log(id);
@@ -56,9 +53,8 @@ async function load(){
     }
 }
 
+/* using the data grabbed from the second API call, places all of it into HTML for display, showing images, text and links */
 function displayGame(details, storeLink) {
-    // let id = localStorage.getItem('id');
-    // console.log(id);
     games.innerHTML = '';
     const card = document.createElement('div');
         card.classList.add('card', 'container', 'squish');
