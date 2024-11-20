@@ -4,6 +4,9 @@ const games = document.getElementById('games');
 
 
 
+
+
+
 // searchBtn.addEventListener('click', ()=> {
 //     console.log(searchBox.value);
 //     const query = searchBox.value;
@@ -40,7 +43,7 @@ async function searchShit($query) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '597cace0d3mshc565c425274703bp1f2f2bjsn4a54f456c6cd',
+            'x-rapidapi-key': '08f94b54e0msh5543c9af6800b8ap1ce59cjsn2a40ad7b2e5c',
             'x-rapidapi-host': 'steam2.p.rapidapi.com'
         }
     };
@@ -54,16 +57,35 @@ async function searchShit($query) {
         console.error(error);
     }
 }
-
+// wawawawa
 function displayGames(result){
     games.innerHTML = '';
-    for(let i=0; i < 10; i++){
-        if(result[i] == undefined){
+    for(let i=0; i < 11; i++){
+        if(i == 10) {
+            const splide = new Splide('.splide', {
+                type   : 'loop',
+                drag   : 'free',
+                perPage: 5,
+                rewind : true,
+                pagination: false,
+            })
+            splide.mount();
             break;
+        } else if(result[i] == undefined){
+            const splide = new Splide('.splide', {
+                type   : 'loop',
+                drag   : 'free',
+                perPage: 5,
+                rewind : true,
+                pagination: false,
+            });
+            splide.mount();
+            break;
+
         } else {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.id = 'game' + [i];
+            const splide__slide = document.createElement('li');
+            splide__slide.classList.add('card', 'splide__slide');
+            splide__slide.id = 'game' + [i];
 
             const img = document.createElement('img');
             img.src = result[i].imgUrl;
@@ -72,68 +94,86 @@ function displayGames(result){
             title.textContent = result[i].title;
             title.href = './game.html';
             title.target = '_blank';
-            title.id = 'link' + [i];
+            title.classList.add('link' + [i]);
 
-            card.appendChild(img);
-            card.appendChild(title);
-            games.appendChild(card);
+            splide__slide.appendChild(img);
+            splide__slide.appendChild(title);
+            games.appendChild(splide__slide);
         }
     }
-    const link0 = document.getElementById('link0');
-    const link1 = document.getElementById('link1');
-    const link2 = document.getElementById('link2');
-    const link3 = document.getElementById('link3');
-    const link4 = document.getElementById('link4');
-    const link5 = document.getElementById('link5');
-    const link6 = document.getElementById('link6');
-    const link7 = document.getElementById('link7');
-    const link8 = document.getElementById('link8');
-    const link9 = document.getElementById('link9');
+    const link0 = document.querySelectorAll('.link0');
+    const link1 = document.querySelectorAll('.link1');
+    const link2 = document.querySelectorAll('.link2');
+    const link3 = document.querySelectorAll('.link3');
+    const link4 = document.querySelectorAll('.link4');
+    const link5 = document.querySelectorAll('.link5');
+    const link6 = document.querySelectorAll('.link6');
+    const link7 = document.querySelectorAll('.link7');
+    const link8 = document.querySelectorAll('.link8');
+    const link9 = document.querySelectorAll('.link9');
 
-    
-    link0.addEventListener("mouseover", zeroClick);
+    for (let i = 0; i < link0.length; i++){
+    link0[i].addEventListener("mouseover", zeroClick);
     function zeroClick() {
         localStorage.setItem('id', '0');
-
+        }
     }
-    link1.addEventListener("mouseover", oneClick);
+    for (let i = 0; i < link1.length; i++){
+    link1[i].addEventListener("mouseover", oneClick);
     function oneClick() {
         localStorage.setItem('id', '1');
-
+        }
     }
-    link2.addEventListener("mouseover", twoClick);
+    for (let i = 0; i < link2.length; i++){
+    link2[i].addEventListener("mouseover", twoClick);
     function twoClick(){
         localStorage.setItem('id', '2');
+        }
     }
-    link3.addEventListener("mouseover", threeClick);
+    for (let i = 0; i < link3.length; i++){
+    link3[i].addEventListener("mouseover", threeClick);
     function threeClick(){
         localStorage.setItem('id', '3');
+        }
     }
-    link4.addEventListener("mouseover", fourClick);
+    for (let i = 0; i < link4.length; i++){
+    link4[i].addEventListener("mouseover", fourClick);
     function fourClick(){
         localStorage.setItem('id', '4');
+        }
     }
-    link5.addEventListener("mouseover", fiveClick);
+    for (let i = 0; i < link5.length; i++){
+    link5[i].addEventListener("mouseover", fiveClick);
     function fiveClick(){
         localStorage.setItem('id', '5');
+        }
     }
-    link6.addEventListener("mouseover", sixClick);
+    for (let i = 0; i < link6.length; i++){
+    link6[i].addEventListener("mouseover", sixClick);
     function sixClick(){
         localStorage.setItem('id', '6');
+        }
     }
-    link7.addEventListener("mouseover", sevenClick);
+    for (let i = 0; i < link7.length; i++){
+    link7[i].addEventListener("mouseover", sevenClick);
     function sevenClick(){
         localStorage.setItem('id', '7');
+        }
     }
-    link8.addEventListener("mouseover", eightClick);
+    for (let i = 0; i < link8.length; i++){
+    link8[i].addEventListener("mouseover", eightClick);
     function eightClick(){
         localStorage.setItem('id', '8');
+        }
     }
-    link9.addEventListener("mouseover", nineClick);
+    for (let i = 0; i < link9.length; i++){
+    link9[i].addEventListener("mouseover", nineClick);
     function nineClick(){
         localStorage.setItem('id', '9');
+        }
     }
 }
+
 
 // const other = document.getElementById('other');
 

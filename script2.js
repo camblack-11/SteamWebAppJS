@@ -6,7 +6,7 @@ async function load(){
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '597cace0d3mshc565c425274703bp1f2f2bjsn4a54f456c6cd',
+            'x-rapidapi-key': '08f94b54e0msh5543c9af6800b8ap1ce59cjsn2a40ad7b2e5c',
             'x-rapidapi-host': 'steam2.p.rapidapi.com'
         }
     };
@@ -31,6 +31,7 @@ async function load(){
     /* Game Detail*/
     async function gameDetail(result){
         let id = localStorage.getItem('id');
+        console.log(id);
         const storeLink = result[id].url;
         const appId = result[id].appId;
         console.log(appId);
@@ -39,7 +40,7 @@ async function load(){
         const keys = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': '597cace0d3mshc565c425274703bp1f2f2bjsn4a54f456c6cd',
+                'x-rapidapi-key': '08f94b54e0msh5543c9af6800b8ap1ce59cjsn2a40ad7b2e5c',
                 'x-rapidapi-host': 'steam2.p.rapidapi.com'
             }
         };
@@ -52,9 +53,9 @@ async function load(){
         } catch (error) {
             console.error(error);
         }
+    }
 }
 
-}
 function displayGame(details, storeLink) {
     // let id = localStorage.getItem('id');
     // console.log(id);
