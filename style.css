@@ -145,8 +145,17 @@
     align-items: center;
     justify-content: center;
 }
-/* .card img {
-    object-fit: cover;
-    height: 45px;
-    width: 120px;
-} */
+.card a {
+    color: white;
+    text-decoration: none;
+}
+.card #title {
+    font-size:xx-large;
+    font-weight: bold;
+    
+}
+
+.squish {
+    padding-top: 30px;
+    margin: 30px;
+}

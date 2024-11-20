@@ -60,7 +60,7 @@ function displayGame(details, storeLink) {
     // console.log(id);
     games.innerHTML = '';
     const card = document.createElement('div');
-        card.classList.add('card');
+        card.classList.add('card', 'container', 'squish');
         card.id = 'game';
 
         const img = document.createElement('img');
@@ -70,24 +70,25 @@ function displayGame(details, storeLink) {
         title.textContent = details.title;
         title.href = storeLink;
         title.target = '_blank';
+        title.id = 'title';
 
         const desc = document.createElement('p');
         desc.textContent = details.description;
 
-        const price = document.createElement('p');
-        price.textContent = details.price;
-
-        const release = document.createElement('p');
-        release.textContent = details.released;
-
         const dev = document.createElement('a');
-        dev.textContent = details.developer.name;
+        dev.textContent = 'Developer: ' + details.developer.name;
         dev.href = details.developer.link;
         dev.target = "_blank";
 
         const pub = document.createElement('a');
-        pub.textContent = details.publisher.name
+        pub.textContent = 'Publisher: ' + details.publisher.name
         pub.href = details.publisher.link;
+
+        const release = document.createElement('p');
+        release.textContent = 'Release Date: ' + details.released;
+
+        const price = document.createElement('p');
+        price.textContent = 'Price: ' + details.price;
 
         card.appendChild(img);
         card.appendChild(title);
