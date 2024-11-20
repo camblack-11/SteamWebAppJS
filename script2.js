@@ -1,0 +1,103 @@
+// const url = `https://steam2.p.rapidapi.com/search/${$query}/page/1`;
+
+// console.log(url);
+const games = document.getElementById('games');
+async function load(){
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': '597cace0d3mshc565c425274703bp1f2f2bjsn4a54f456c6cd',
+            'x-rapidapi-host': 'steam2.p.rapidapi.com'
+        }
+    };
+
+    let url = localStorage.getItem('transfer');
+        console.log(url);
+    
+    
+
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        // displayGame(result);
+        gameDetail(result)
+    } catch (error) {
+        console.error(error);
+    } 
+
+    
+    /* Game Detail*/
+    async function gameDetail(result){
+        let id = localStorage.getItem('id');
+        const storeLink = result[id].url;
+        const appId = result[id].appId;
+        console.log(appId);
+        const game = `https://steam2.p.rapidapi.com/appDetail/${appId}`;
+        console.log(game);
+        const keys = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': '597cace0d3mshc565c425274703bp1f2f2bjsn4a54f456c6cd',
+                'x-rapidapi-host': 'steam2.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const pickup = await fetch(game, keys);
+            const details = await pickup.json();
+            console.log(details);
+            displayGame(details, storeLink);
+        } catch (error) {
+            console.error(error);
+        }
+}
+
+}
+function displayGame(details, storeLink) {
+    // let id = localStorage.getItem('id');
+    // console.log(id);
+    games.innerHTML = '';
+    const card = document.createElement('div');
+        card.classList.add('card');
+        card.id = 'game';
+
+        const img = document.createElement('img');
+        img.src = details.imgUrl;
+
+        const title = document.createElement('a');
+        title.textContent = details.title;
+        title.href = storeLink;
+        title.target = '_blank';
+
+        const desc = document.createElement('p');
+        desc.textContent = details.description;
+
+        const price = document.createElement('p');
+        price.textContent = details.price;
+
+        const release = document.createElement('p');
+        release.textContent = details.released;
+
+        const dev = document.createElement('a');
+        dev.textContent = details.developer.name;
+        dev.href = details.developer.link;
+        dev.target = "_blank";
+
+        const pub = document.createElement('a');
+        pub.textContent = details.publisher.name
+        pub.href = details.publisher.link;
+
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(dev);
+        card.appendChild(pub);
+        card.appendChild(release);
+        card.appendChild(price);
+        games.appendChild(card);
+}
+
+
+load();
