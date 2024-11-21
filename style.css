@@ -1,110 +1,15 @@
 /* TOOLS */
-/* widths */
-
-.desktop {
-    display: block;
-}
-
-@media (max-width: 767px) {
-    .desktop {
-      display: none;
-    }
-}
-
-.earlyDesktop {
-    display: block;
-}
-
-@media (max-width: 991px) {
-    .earlyDesktop {
-        display: none;
-    }
-}
-
-.tablet {
-    display: block;
-}
-
-@media (min-width: 992px) {
-    .tablet {
-        display: none;
-    }
-}
-
-.mobile {
-    display: block;
-    padding: 0;
-}
-
-@media (min-width: 768px) {
-    .mobile {
-        display: none;
-    }
-}
-
-
 /* general */
 .container .nav-link:hover {
-    color: #198754;
+    color: #0d6efd;;
 }
-
-.right a {
-    float: right;
-}
-
-.center {
-    margin: auto;
-}
-
 .background {
     background-color: #2b3035;
 }
 
 /* home-specific */
-
 #hero {
     background: #161616 url('./img/hero.jpg') no-repeat right/cover;
-}
-
-@media screen and (min-width: 901px) {
-    #hero .container {
-        padding: 10%;
-    }
-}
-
-#hero h1 {
-    color: white;
-    font-size: 80px;
-}
-#hero p {
-    color: white;
-}
-
-.location {
-    position: relative;
-} 
-
-.location .map img {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .location .map img {
-        width: 70%;
-        float: right;
-    }
-}
-
-@media (min-width: 768px) {
-    .location .address {
-        width: 25%;
-        height: 100%;
-        float: left;
-        position: absolute;
-        top: 40%;
-        bottom: 50%;
-        
-    }
 }
 
 /* contact-specific */
@@ -112,32 +17,26 @@
     margin-bottom: 20px;
     width: 100%;
 }
-
 #contact-form label {
     display: block;
     margin-bottom: 5px;
 }
-
 #contact-form input, 
 #contact-form textarea {
     width: 100%;
     padding: 10px;
     border: 2px solid #bbbbbb;
 }
-
 #contact-form textarea {
     height: 200px;
 }
-
 #contact-form input:focus, 
 #contact-form textarea:focus {
     outline: none;
-    border-color: #198754;
+    border-color: #0d6efd;
 }
 
-
 /* JS STUFF */
-
 .card {
     border: 1px solid #ddd;
     display: flex;
@@ -154,7 +53,6 @@
     font-weight: bold;
     
 }
-
 .squish {
     padding-top: 30px;
     margin: 30px;

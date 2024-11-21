@@ -1,6 +1,6 @@
 const games = document.getElementById('games');
 
-/* querying the same API call on index.html with the sent over search link to grab the same Array information */
+/* querying the same API call on index.html with the sent over search link (transfer) to grab the same Array information */
 async function load(){
     const options = {
         method: 'GET',
@@ -17,7 +17,6 @@ async function load(){
         const response = await fetch(url, options);
         const result = await response.json();
         console.log(result);
-        // displayGame(result);
         gameDetail(result)
     } catch (error) {
         console.error(error);
@@ -25,7 +24,7 @@ async function load(){
 
     
     /* Game Detail grabbing */
-    /* uses a number id kept in local storage from the index page to determine which part of the array to grab the steam appId from, then query the API to grab the detailed information */
+    /* uses a number id kept in local storage from the index page to determine which part of the array to grab the steam appId from, then query the appDetail API with this appId to grab the detailed information array */
     async function gameDetail(result){
         let id = localStorage.getItem('id');
         console.log(id);
@@ -53,7 +52,7 @@ async function load(){
     }
 }
 
-/* using the data grabbed from the second API call, places all of it into HTML for display, showing images, text and links */
+/* using the data grabbed from the second API call (details) + the url to the store page for the game as it is only stored in the search array, not the detail array, places all of it into HTML for display, showing images, text and links using createElements targetting the details array */
 function displayGame(details, storeLink) {
     games.innerHTML = '';
     const card = document.createElement('div');

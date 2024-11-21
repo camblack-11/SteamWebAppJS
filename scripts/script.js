@@ -2,7 +2,7 @@ const searchBtn = document.getElementById('searchBtn');
 const searchBox = document.getElementById('searchBox');
 const games = document.getElementById('games');
 
-/* grabs the text entered into the search box and sends it to be plugged into the API function, uses localStorage to have "Half-Life" be the default query upon load */
+/* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable, uses localStorage to have "Half-Life" be the default query upon load */
 function querying() {
     console.log(searchBox.value);
     const query = searchBox.value;
@@ -10,7 +10,7 @@ function querying() {
     localStorage.setItem('searchQuery', 'Half-Life');
 };
 
-/* resets to the searchquery localStorage and resets the id localStorage to "nope" (which is used for determining which link was clicked and sending that information to game.html) upon load */
+/* resets to the searchQuery localStorage and resets the id localStorage to "nope" (which is used for determining which link was clicked and sending that information to game.html) upon load */
 window.addEventListener('load', (event)=> {
     let searchItem = localStorage.getItem('searchQuery');
     localStorage.setItem('id', 'nope');
@@ -18,7 +18,7 @@ window.addEventListener('load', (event)=> {
     searchShit(searchItem);
 })
 
-/* calls the API with the serach query, also sends that specific link + query to game.html */
+/* calls the API with the serach query, also sends that specific link + query (url) to game.html as the localStorage variable "transfer" */
 async function searchShit($query) {    
     const url = `https://steam2.p.rapidapi.com/search/${$query}/page/1`;
     localStorage.setItem('transfer', url);
@@ -34,6 +34,7 @@ async function searchShit($query) {
         }
     };
 
+    /* using the api to fetch the url variable with the search query link, and the api key + host to combine them together for a valid API call as response. response is then converted to json to make an array called result, which is sent to the displayGames function */
     try {
         const response = await fetch(url, options);
         const result = await response.json();
@@ -44,7 +45,8 @@ async function searchShit($query) {
     }
 }
 
-/* setting a for loop to loop through the HTML creating code up to 10 times, with an else if waiting for an undefinied when it runs out and has less than 10 games appear, and an if waiting to cut it off if it hits 10 games */
+/* setting a for loop to loop through the HTML creating code up to 10 times using createElements in conjunction with referring to the array class (result) + the loop number it's on to target a specific object in the array, then targeting the different classes within that object that house the information like the game title or image, with an else if waiting for an undefinied when it runs out and has less than 10 games appear, and an if waiting to cut it off if it hits 10 games */
+
 /* the splide framework is integrated here with the settings to alter how it functions, and the HTML createElement code is set up with the relevant classes to allow it to work */
 function displayGames(result){
     games.innerHTML = '';
