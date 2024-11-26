@@ -1,6 +1,7 @@
 const searchBtn = document.getElementById('searchBtn');
 const searchBox = document.getElementById('searchBox');
 const games = document.getElementById('games');
+localStorage.setItem('searchQuery', 'Half-Life');
 
 /* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable, uses localStorage to have "Half-Life" be the default query upon load */
 function querying() {

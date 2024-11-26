@@ -1,4 +1,5 @@
 const games = document.getElementById('games');
+const fav = document.getElementById('fav');
 
 /* querying the same API call on index.html with the sent over search link (transfer) to grab the same Array information */
 async function load(){
@@ -95,6 +96,69 @@ function displayGame(details, storeLink) {
         card.appendChild(price);
         games.appendChild(card);
 }
+fav.addEventListener("click", favorite);
+async function favorite() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': '08f94b54e0msh5543c9af6800b8ap1ce59cjsn2a40ad7b2e5c',
+            'x-rapidapi-host': 'steam2.p.rapidapi.com'
+        }
+    };
 
+    let url = localStorage.getItem('transfer');
+    
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        let id = localStorage.getItem('id');
+        const entryLink = result[id].url;
+        const entryTitle = result[id].title;
+        const entryImg = result[id].imgUrl;
+        console.log(entryLink);
+        console.log(entryTitle);
+        console.log(entryImg);
+        addEntry(entryLink, entryTitle, entryImg);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function addEntry(entryLink, entryTitle, entryImg) {
+    var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+    if(existingEntries == null) existingEntries = [];
+    var entry = {
+        "title": entryTitle,
+        "url": entryLink,
+        "imgUrl": entryImg
+    };
+    console.log(entry);
+    console.log(existingEntries);
+    localStorage.setItem("entry", JSON.stringify(entry));
+    existingEntries.push(entry);
+    if(checkArrayDupeFree(existingEntries, JSON.stringify)) {
+    // Save allEntries back to local storage
+    localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+    } else {
+        console.log("Already Entered!");
+    }
+}
+
+function checkArrayDupeFree(myArray, idFunc) {
+    const dupeMap = new Map();
+    for (const el of myArray) {
+        const id = idFunc(el);
+        if (dupeMap.has(id))
+            return false;
+        dupeMap.set(id, el);
+    }
+    return true;
+}
+
+function clear() {
+    localStorage.setItem("allEntries", null);
+    // console.log(localStorage.getItem("allEntries"));
+    console.log("Array Cleared!");
+}
 
 load();
