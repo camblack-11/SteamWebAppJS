@@ -8,7 +8,7 @@ function favGames() {
     for(let i=0; i >= 0; i++){
         if (favs[i] == undefined) {
             break;
-        } else {
+        } else { 
             const card = document.createElement('div');
             card.classList.add('card');
             card.id = 'game';
@@ -16,15 +16,19 @@ function favGames() {
             const img = document.createElement('img');
             img.src = favs[i].imgUrl;
 
-            const title = document.createElement('a');
-            title.textContent = favs[i].title;
-            title.href = favs[i].url;
-            title.target = '_blank';
-            title.id = 'title';
+            const titleForm = document.createElement('form');
+            const deetId = favs[i].searchId;
+            const deetUrl = '"' + favs[i].searchUrl + '"';        
+            titleForm.action = `javascript:gameDeets(${deetId}, ${deetUrl})`;
 
-            const form = document.createElement('form');
-            form.id = i;
-            form.action = `javascript:kill(${form.id})`;
+            const title = document.createElement('input');
+            title.type = 'submit';
+            title.value = favs[i].title;
+            title.classList.add('title');
+
+            const favForm = document.createElement('form');
+            favForm.id = i;
+            favForm.action = `javascript:kill(${favForm.id})`;
             
             const unFav = document.createElement('input');
             unFav.type = 'submit';
@@ -33,9 +37,10 @@ function favGames() {
             
 
             card.appendChild(img);
-            card.appendChild(title);
-            form.appendChild(unFav);
-            card.appendChild(form);
+            titleForm.appendChild(title);
+            card.appendChild(titleForm);
+            favForm.appendChild(unFav);
+            card.appendChild(favForm);
             games.appendChild(card);
         }
     }
@@ -52,6 +57,14 @@ function kill(formId) {
 function killAll() {
     localStorage.setItem("allEntries", null);
     location.reload();
+}
+
+function gameDeets(deetId, deetUrl) {
+    console.log(deetId);
+    console.log(deetUrl);
+    localStorage.setItem('id', deetId);
+    localStorage.setItem('transfer', deetUrl);
+    window.open("./game.html", "_value");
 }
 
 favGames();

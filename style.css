@@ -42,6 +42,15 @@
     border-color: #198754;
 }
 
+/* Favorites specific */
+.title {
+    background-color: #00000000;
+    color: white;
+    border: none;
+    font-size:xx-large;
+    font-weight: bold;
+}
+
 /* JS STUFF */
 .card {
     border: 1px solid #ddd;

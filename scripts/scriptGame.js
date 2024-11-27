@@ -125,22 +125,29 @@ async function favorite() {
         const entryLink = result[id].url;
         const entryTitle = result[id].title;
         const entryImg = result[id].imgUrl;
+        const entryId = result[id].appId; 
         console.log(entryLink);
         console.log(entryTitle);
         console.log(entryImg);
-        addEntry(entryLink, entryTitle, entryImg);
+        console.log(entryId);
+        console.log(url);
+        console.log(id);
+        addEntry(entryLink, entryTitle, entryImg, entryId, url, id);
     } catch (error) {
         console.error(error);
     }
 }
 
-function addEntry(entryLink, entryTitle, entryImg) {
+function addEntry(entryLink, entryTitle, entryImg, entryId, url, id) {
     var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
     if(existingEntries == null) existingEntries = [];
     var entry = {
+        "appId": entryId,
         "title": entryTitle,
         "url": entryLink,
-        "imgUrl": entryImg
+        "imgUrl": entryImg,
+        "searchUrl": url,
+        "searchId" : id
     };
     console.log(entry);
     console.log(existingEntries);
