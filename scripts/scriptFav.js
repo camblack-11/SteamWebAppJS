@@ -5,6 +5,19 @@ console.log(favs);
 function favGames() {
     console.log(favs);
     games.innerHTML = '';
+    if(favs == 0 || favs == null){
+        console.log('no!!');
+        const header = document.createElement('h2');
+        header.textContent = "You don't have any favorite games!";
+        header.classList.add('centerer', 'marg');
+
+        const subHeader = document.createElement('p');
+        subHeader.textContent = "Click the favorites button on any game you've opened!";
+        subHeader.classList.add('centerer');
+
+        games.appendChild(header);
+        games.appendChild(subHeader);
+    }
     for(let i=0; i >= 0; i++){
         if (favs[i] == undefined) {
             break;

@@ -94,6 +94,7 @@ function displayGame(details, storeLink) {
         fav.type = 'submit'
         fav.id = 'fav';
         fav.value = 'Favorite!';
+        fav.classList.add('marg');
 
         card.appendChild(img);
         card.appendChild(title);
