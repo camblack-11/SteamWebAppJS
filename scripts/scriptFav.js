@@ -42,11 +42,15 @@ function favGames() {
 }
 
 function kill(formId) {
-    // console.log(formId);
     var num = formId;
     favs.splice(num,1);
     console.log(favs);
     localStorage.setItem("allEntries", JSON.stringify(favs));
+    location.reload();
+}
+
+function killAll() {
+    localStorage.setItem("allEntries", null);
     location.reload();
 }
 

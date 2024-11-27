@@ -6,6 +6,11 @@
 .background {
     background-color: #2b3035;
 }
+.centerer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* home-specific */
 #hero {

@@ -87,6 +87,14 @@ function displayGame(details, storeLink) {
         const price = document.createElement('p');
         price.textContent = 'Price: ' + details.price;
 
+        const form = document.createElement('form');
+        form.action = 'javascript:favorite()';
+
+        const fav = document.createElement('input');
+        fav.type = 'submit'
+        fav.id = 'fav';
+        fav.value = 'Favorite!';
+
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(desc);
@@ -94,9 +102,11 @@ function displayGame(details, storeLink) {
         card.appendChild(pub);
         card.appendChild(release);
         card.appendChild(price);
+        form.appendChild(fav);
+        card.appendChild(form);
         games.appendChild(card);
 }
-fav.addEventListener("click", favorite);
+// fav.addEventListener("click", favorite);
 async function favorite() {
     const options = {
         method: 'GET',
@@ -153,12 +163,6 @@ function checkArrayDupeFree(myArray, idFunc) {
         dupeMap.set(id, el);
     }
     return true;
-}
-
-function clear() {
-    localStorage.setItem("allEntries", null);
-    // console.log(localStorage.getItem("allEntries"));
-    console.log("Array Cleared!");
 }
 
 load();
