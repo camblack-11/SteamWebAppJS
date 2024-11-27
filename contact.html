@@ -65,7 +65,7 @@
                 <br>
                 <main id="contact-form" class="col">
                     <div class="container">
-                        <form action="./index.html">
+                        <form action="javascript:redirect()">
                             <!-- input 1: name -->
                             <div class="input-group">
                                 <label for="name">Name</label>
@@ -87,7 +87,6 @@
                             </div>
                             <!-- input 4: submit -->
                             <div class="submit-group">
-                                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                                 <input type="submit" class="btn btn-primary" value="Submit">
                                 <br><br>
                             </div>
@@ -107,6 +106,14 @@
         </ul>
     </footer>
 
+    <script>
+        function redirect() {
+            let text = "Form submitted!\nClick OK to go back to the home page.";
+            if (confirm(text) == true) {
+                location.replace("./index.html");
+            } 
+        }
+    </script>
     <!-- importing the bootstrap script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">    
     </script>
