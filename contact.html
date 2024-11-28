@@ -66,7 +66,8 @@
                 <!-- contact form -->
                 <main id="contact-form" class="col">
                     <div class="container">
-                        <form action="javascript:redirect()">
+                        <p id="error"></p>
+                        <form action="javascript:valid()">
                             <!-- input 1: name -->
                             <div class="input-group">
                                 <label for="name">Name</label>
@@ -109,6 +110,20 @@
     </footer>
 
     <script>
+        function valid() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+            if(name === '' || email === '' || phone === '' || message === '') {
+                console.log('fucker');
+                // alert('wrong');
+                error.innerHTML = "All fields must be filled out";
+            } else {
+                error.innerHTML = "";
+                redirect();
+            }
+        }
         function redirect() {
             let text = "Form submitted!\nClick OK to go back to the home page.";
             if (confirm(text) == true) {

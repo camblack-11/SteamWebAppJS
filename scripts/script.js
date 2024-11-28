@@ -1,14 +1,26 @@
 const searchBtn = document.getElementById('searchBtn');
 const searchBox = document.getElementById('searchBox');
 const games = document.getElementById('games');
+const text = document.getElementById('text');
 /* default search query is set upon load */
 localStorage.setItem('searchQuery', 'Half-Life');
 
 /* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable */
 function querying() {
     console.log(searchBox.value);
+    if(searchBox.value == 0){
+        const carousel = document.getElementById('splide01');
+        console.log(text);
+        carousel.style.display = "none";
+        text.innerHTML = '';
+        const noText = document.createElement('h2');
+        noText.textContent = "No Results!";
+        text.appendChild(noText);
+    } else {
+    text.innerHTML = '';
     const query = searchBox.value;
     searchShit(query);
+    }
 };
 
 /* resets to the searchQuery localStorage and resets the id localStorage to "nope" (which is used for determining which link was clicked and sending that information to game.html) upon load */
@@ -40,7 +52,17 @@ async function searchShit($query) {
         const response = await fetch(url, options);
         const result = await response.json();
         console.log(result);
+        if(result.length == 0) {
+            console.log('nothin');
+            const carousel = document.getElementById('splide01');
+            carousel.style.display = "none";
+            text.innerHTML = '';
+            const noText = document.createElement('h2');
+            noText.textContent = "No Results!";
+            text.appendChild(noText);
+        } else {
         displayGames(result);
+        }
     } catch (error) {
         console.error(error);
     }
@@ -51,6 +73,7 @@ async function searchShit($query) {
 /* the splide framework is integrated here with the settings to alter how it functions, and the HTML createElement code is set up with the relevant classes to allow it to work */
 function displayGames(result){
     games.innerHTML = '';
+    
     for(let i=0; i < 11; i++){
         if(i == 10) {
             const splide = new Splide('.splide', {
@@ -92,6 +115,9 @@ function displayGames(result){
             games.appendChild(splide__slide);
         }
     }
+    const carousel = document.getElementById('splide01');
+    carousel.style.display = "block";
+
     /* an (unfortunately) somewhat brute-forcey solution for getting the specific game clicked over to game.html
 
     relies on using mouseover addEventListeners with querySelectorAlls to account for how the splide treats its ability to loop around. each mouseover will update an id localStorage value to a number between 0-9 depending on its placement, corresponding with its placement in the API array, this id value is read on game.html in conjunction with the array being called on that side to grab the correct game you clicked on

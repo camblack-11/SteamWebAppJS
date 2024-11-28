@@ -32,7 +32,24 @@ body {
     padding: 10%;
 }
 
+#text {
+    font-size:xx-large;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding: 10px; */
+}
+
 /* contact-specific */
+#error {
+    color: #842029;
+    background-color: #f8d7da;
+    /* border: 1px solid #842029; */
+    border-radius: 5px;
+}
+
 #contact-form .input-group {
     margin-bottom: 20px;
     width: 100%;
