@@ -8,18 +8,15 @@ localStorage.setItem('searchQuery', 'Half-Life');
 /* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable */
 function querying() {
     console.log(searchBox.value);
-    if(searchBox.value == 0){
-        const carousel = document.getElementById('splide01');
-        console.log(text);
-        carousel.style.display = "none";
+    if(searchBox.value == 0) {
         text.innerHTML = '';
         const noText = document.createElement('h2');
-        noText.textContent = "No Results!";
+        noText.textContent = "Please enter a search value";
         text.appendChild(noText);
     } else {
     text.innerHTML = '';
     const query = searchBox.value;
-    searchShit(query);
+    searchIt(query);
     }
 };
 
@@ -28,11 +25,11 @@ window.addEventListener('load', (event)=> {
     let searchItem = localStorage.getItem('searchQuery');
     localStorage.setItem('id', 'nope');
     console.log(searchItem);
-    searchShit(searchItem);
+    searchIt(searchItem);
 })
 
 /* calls the API with the serach query, also sends that specific link + query (url) to game.html as the localStorage variable "transfer" */
-async function searchShit($query) {    
+async function searchIt($query) {    
     const url = `https://steam2.p.rapidapi.com/search/${$query}/page/1`;
     localStorage.setItem('transfer', url);
     let test = localStorage.getItem('transfer');

@@ -39,14 +39,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* padding: 10px; */
 }
 
 /* contact-specific */
 #error {
     color: #842029;
     background-color: #f8d7da;
-    /* border: 1px solid #842029; */
     border-radius: 5px;
 }
 
