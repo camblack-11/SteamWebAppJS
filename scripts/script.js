@@ -1,14 +1,14 @@
 const searchBtn = document.getElementById('searchBtn');
 const searchBox = document.getElementById('searchBox');
 const games = document.getElementById('games');
+/* default search query is set upon load */
 localStorage.setItem('searchQuery', 'Half-Life');
 
-/* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable, uses localStorage to have "Half-Life" be the default query upon load */
+/* grabs the text entered into the search box using searchBox.value and sends it to be plugged into the API function with the query variable */
 function querying() {
     console.log(searchBox.value);
     const query = searchBox.value;
     searchShit(query);
-    localStorage.setItem('searchQuery', 'Half-Life');
 };
 
 /* resets to the searchQuery localStorage and resets the id localStorage to "nope" (which is used for determining which link was clicked and sending that information to game.html) upon load */

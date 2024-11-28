@@ -107,7 +107,8 @@ function displayGame(details, storeLink) {
         card.appendChild(form);
         games.appendChild(card);
 }
-// fav.addEventListener("click", favorite);
+
+/* queries the original index API call (options) in conjunction with the search term (transfer/url) to grab needed data (appId, imgUrl, title, url, the search id), this data is sent to addEntry() */
 async function favorite() {
     const options = {
         method: 'GET',
@@ -139,6 +140,8 @@ async function favorite() {
     }
 }
 
+/* addEntry() grabs all the game data from favorite() and puts it into favorites array (existingEntries) in localStorage  */
+/* checkArrayDupeFree() acts as a failsafe to prevent the user from adding the same game multiple times, stringifies the array and scans it to see if a duplicate entry exists already ends the function with a console.log saying it's already been entered. if game is unique then it will set existingEntries into localStorage */
 function addEntry(entryLink, entryTitle, entryImg, entryId, url, id) {
     var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
     if(existingEntries == null) existingEntries = [];
@@ -162,6 +165,7 @@ function addEntry(entryLink, entryTitle, entryImg, entryId, url, id) {
     }
 }
 
+/* creates a Map() with every entry stringified (dupeMap), runs a for loop with the array entry being saved as an individual variable (el), then being stringified (id) to compare to the duplicate entries, if an entry already exists it will return false */
 function checkArrayDupeFree(myArray, idFunc) {
     const dupeMap = new Map();
     for (const el of myArray) {

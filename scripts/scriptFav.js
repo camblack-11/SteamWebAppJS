@@ -1,7 +1,11 @@
 const games = document.getElementById('games');
+/* allEntries array is grabbed from localStorage and put into the favs variable for use within the script */
 const favs = JSON.parse(localStorage.getItem("allEntries"));
 console.log(favs);
 
+/* checks the favs array if there are no games, if there are no games then show a header and paragraph telling the user they have no favorite games, otherwise, execute the rest of the function */
+/* runs a for loop that increases that uses createElements to build cards that hold game information, the information is pulled from the favs array using the i value to pull the right entry */
+/* the gameDeets() and kill() functions are set up to trigger when the right elements are clicked, with variables implemented to send information to those functions. gameDeets() sends the searchId (deetId) and searchUrl (deetUrl) from the favs array. kill() sends the id of the form it's in */
 function favGames() {
     console.log(favs);
     games.innerHTML = '';
@@ -59,6 +63,7 @@ function favGames() {
     }
 }
 
+/* takes the id from the form and uses it to splice out the array entry from the favs array, and sets it into localStorage. the page is then reloaded to display changes */
 function kill(formId) {
     var num = formId;
     favs.splice(num,1);
@@ -67,11 +72,13 @@ function kill(formId) {
     location.reload();
 }
 
+/* sets the localStorage array as null to remove all entries, then reloads the page to display changes */
 function killAll() {
     localStorage.setItem("allEntries", null);
     location.reload();
 }
 
+/* takes the deetId and deetUrl sent over from the form and sets them into localStorage similar to when a game is searched and clicked on index.html, loads game.html and uses these values to call the api there and load the page as normal */
 function gameDeets(deetId, deetUrl) {
     console.log(deetId);
     console.log(deetUrl);
